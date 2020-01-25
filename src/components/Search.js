@@ -42,14 +42,17 @@ export class Search extends React.Component {
   render() {
     return (
       <section className="search">
-        <div className="container__form">
+        <div className="container__form container centered">
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               placeholder="Search"
               onChange={this.handleChange}
             />
-            <input type="submit" value="find" />
+            {/* <input type="submit" value="find" /> */}
+            <button type="submit">
+              <i className="fa fa-search" />
+            </button>
           </form>
         </div>
         {/* ApiResults is wrapped in its own div already */}

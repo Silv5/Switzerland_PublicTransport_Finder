@@ -1,15 +1,85 @@
-body {
-  background: #333;
-  color: whitesmoke;
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap");
+
+:root {
+  --primary-color: #bada55;
+  --dark-gray: #333;
+  --light-gray: #f4f4f4;
 }
 
+/* global */
+body {
+  color: var(--light-gray);
+  background: var(--dark-gray);
+  font-family: "Roboto", sans-serif;
+}
+
+section {
+  margin: 1em 0;
+  padding: 1em;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* specific sections */
+.container__results div {
+  margin: 1em auto;
+  max-width: 300px;
+  background: rgba(0, 0, 0, 0.178);
+  border: 1px solid rgba(26, 26, 26, 0.616);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container__form input[type="text"] {
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.container__form button {
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.container__form input[type="text"]::placeholder {
+  padding-left: 1em;
+}
+
+/* helpers */
 .title {
-  color: #bada55;
+  color: var(--primary-color);
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.centered {
   text-align: center;
 }
 
-.apiResults {
-  margin: 1em;
-  background: rgba(0, 0, 0, 0.178);
-  border: 1px solid rgba(26, 26, 26, 0.616);
+.btn {
+  margin: 0;
+  min-width: 120px;
+  margin-right: 1em;
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  color: var(--dark-gray);
+  background: var(--primary-color);
+
+  transition: all 0.3s linear;
+}
+
+.btn:hover {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
 }
