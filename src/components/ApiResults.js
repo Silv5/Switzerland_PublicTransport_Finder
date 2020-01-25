@@ -15,8 +15,17 @@ export class ApiResults extends React.Component {
         <div className="container__results">
           {apiData.stations.map(res => (
             <div key={res.id} className="result">
-              <p>{res.name}</p>
-              <p>{res.icon}</p>
+              <h5>
+                {res.icon === "bus" ? (
+                  <i className="fas fa-bus" />
+                ) : (
+                  <i className="fas fa-train" />
+                )}
+                {res.name}
+              </h5>
+
+              <p>X: {res.coordinate["x"]}</p>
+              <p>Y: {res.coordinate["y"]}</p>
             </div>
           ))}
         </div>
