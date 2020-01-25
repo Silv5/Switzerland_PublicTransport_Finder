@@ -5,11 +5,7 @@ export class ApiResults extends React.Component {
     var apiData = this.props.apiData;
 
     if (apiData.length === 0) {
-      return (
-        <div className="apiResults">
-          <h3>Results: 0</h3>
-        </div>
-      );
+      return null;
     } else {
       return (
         <div className="container__results">
@@ -24,8 +20,8 @@ export class ApiResults extends React.Component {
                 {res.name}
               </h5>
 
-              <p>X: {res.coordinate["x"]}</p>
-              <p>Y: {res.coordinate["y"]}</p>
+              <p>Lat: {res.coordinate["x"]}</p>
+              <p>Lon: {res.coordinate["y"]}</p>
             </div>
           ))}
         </div>
