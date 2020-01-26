@@ -15,6 +15,12 @@ export class Search extends React.Component {
     location: "locations?query="
   };
 
+  constructor(props) {
+    super(props);
+
+    this.queryHandler = this.queryHandler.bind(this);
+  }
+
   handleInputChange = e => {
     if (e.target.value === "") {
       this.setState({ showSuggestions: false });
@@ -34,7 +40,7 @@ export class Search extends React.Component {
     );
   };
 
-  getInfo = () => {
+  getInfo() {
     axios
       .get(`${this.api.url}locations?query=${this.state.query}`)
       .then(({ data }) => {
@@ -43,13 +49,24 @@ export class Search extends React.Component {
           showSuggestions: true
         });
       });
-  };
+  }
+
+  queryHandler(newLocation) {
+    this.setState({
+      query: newLocation,
+      showSuggestions: false
+    });
+  }
+
+  handleSubmit() {
+    alert("getting all the data!");
+  }
 
   render() {
     return (
       <section className="search">
         <div className="container__form">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="container__form--child">
               <div className="search__bar">
                 <input
@@ -57,6 +74,7 @@ export class Search extends React.Component {
                   placeholder="Search for..."
                   ref={input => (this.search = input)}
                   onChange={this.handleInputChange}
+                  value={this.state.query}
                 />
               </div>
               <div className="search__btn">
@@ -64,9 +82,12 @@ export class Search extends React.Component {
                   <i className="fa fa-search" />
                 </button>
               </div>
-              <div className="search__autocomplete">
+              <div className="search__autocomplete" id="clickNhide">
                 {this.state.showSuggestions && (
-                  <Suggestions results={this.state.results} />
+                  <Suggestions
+                    results={this.state.results}
+                    queryHandler={this.queryHandler}
+                  />
                 )}
               </div>
             </div>
