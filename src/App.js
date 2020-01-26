@@ -2,6 +2,7 @@ import React from "react";
 
 import "./styles.css";
 
+// import { Search } from "./components/Search";
 import { Search } from "./components/Search";
 
 const header = (

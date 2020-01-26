@@ -1,11 +1,13 @@
 import React from "react";
+import axios from "axios";
 
-import { ApiResults } from "./ApiResults";
+import { Suggestions } from "./Suggestions";
 
 export class Search extends React.Component {
   state = {
     query: "",
-    data: []
+    results: [],
+    showSuggestions: false
   };
 
   api = {
@@ -13,50 +15,63 @@ export class Search extends React.Component {
     location: "locations?query="
   };
 
-  constructor(props) {
-    super(props);
+  handleInputChange = e => {
+    if (e.target.value === "") {
+      this.setState({ showSuggestions: false });
+    }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+    this.setState(
+      {
+        query: this.search.value
+      },
+      () => {
+        if (this.state.query && this.state.query.length > 1) {
+          if (this.state.query.length % 2 === 0) {
+            this.getInfo();
+          }
+        }
+      }
+    );
+  };
 
-  handleSubmit(event) {
-    event.preventDefault();
-    let apiLocation = this.api.url + this.api.location;
-
-    // fetch data from api
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", () => {
-      // update state data
-      this.setState({ data: JSON.parse(xhr.responseText) });
-    });
-
-    xhr.open("GET", apiLocation + this.state.query);
-    xhr.send();
-  }
-
-  handleChange(event) {
-    this.setState({ query: event.target.value });
-  }
+  getInfo = () => {
+    axios
+      .get(`${this.api.url}locations?query=${this.state.query}`)
+      .then(({ data }) => {
+        this.setState({
+          results: data.stations,
+          showSuggestions: true
+        });
+      });
+  };
 
   render() {
     return (
       <section className="search">
-        <div className="container__form container centered">
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              placeholder="Search"
-              onChange={this.handleChange}
-            />
-            {/* <input type="submit" value="find" /> */}
-            <button type="submit">
-              <i className="fa fa-search" />
-            </button>
+        <div className="container__form">
+          <form>
+            <div className="container__form--child">
+              <div className="search__bar">
+                <input
+                  className="search__bar--input"
+                  placeholder="Search for..."
+                  ref={input => (this.search = input)}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="search__btn">
+                <button type="submit">
+                  <i className="fa fa-search" />
+                </button>
+              </div>
+              <div className="search__autocomplete">
+                {this.state.showSuggestions && (
+                  <Suggestions results={this.state.results} />
+                )}
+              </div>
+            </div>
           </form>
         </div>
-        {/* ApiResults is wrapped in its own div already */}
-        <ApiResults apiData={this.state.data} />
       </section>
     );
   }
