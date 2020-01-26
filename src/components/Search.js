@@ -2,23 +2,30 @@ import React from "react";
 import axios from "axios";
 
 import { Suggestions } from "./Suggestions";
+import { LocationDetails } from "./LocationDetails";
 
 export class Search extends React.Component {
   state = {
+    id: 0,
     query: "",
+    limit: 5,
     results: [],
+    locationDetails: [],
     showSuggestions: false
   };
 
   api = {
     url: "https://transport.opendata.ch/v1/",
-    location: "locations?query="
+    location: "locations?query=",
+    station: "stationboard?id=",
+    max: "&limit="
   };
 
   constructor(props) {
     super(props);
 
     this.queryHandler = this.queryHandler.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange = e => {
@@ -41,25 +48,43 @@ export class Search extends React.Component {
   };
 
   getInfo() {
-    axios
-      .get(`${this.api.url}locations?query=${this.state.query}`)
-      .then(({ data }) => {
-        this.setState({
-          results: data.stations,
-          showSuggestions: true
-        });
+    let url = this.api.url + this.api.location + this.state.query;
+
+    axios.get(url).then(({ data }) => {
+      this.setState({
+        results: data.stations,
+        showSuggestions: true
       });
+    });
   }
 
-  queryHandler(newLocation) {
+  // used by child component (Suggestions)
+  queryHandler(newLocation, newId) {
     this.setState({
+      id: newId,
       query: newLocation,
       showSuggestions: false
     });
   }
 
-  handleSubmit() {
-    alert("getting all the data!");
+  handleSubmit(event) {
+    event.preventDefault();
+
+    // this.state.id is changed on child element (Suggestions)
+    // now this function fetches the station details from the API's endpoint:
+    // `https://transport.opendata.ch/v1/stationboard?id=${this.state.id}&limit=10`
+    let url =
+      this.api.url +
+      this.api.station +
+      this.state.id +
+      this.api.max +
+      this.state.limit;
+
+    axios.get(url).then(({ data }) => {
+      this.setState({
+        locationDetails: data.stationboard
+      });
+    });
   }
 
   render() {
@@ -92,6 +117,14 @@ export class Search extends React.Component {
               </div>
             </div>
           </form>
+        </div>
+        <div className="container__details">
+          {this.state.locationDetails.length > 0 ? (
+            <LocationDetails
+              data={this.state.locationDetails}
+              arrayLength={this.state.limit}
+            />
+          ) : null}
         </div>
       </section>
     );
