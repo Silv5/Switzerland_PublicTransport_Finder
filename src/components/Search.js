@@ -96,7 +96,7 @@ export class Search extends React.Component {
               <div className="search__bar">
                 <input
                   className="search__bar--input"
-                  placeholder="Search for..."
+                  placeholder="Search for location"
                   ref={input => (this.search = input)}
                   onChange={this.handleInputChange}
                   value={this.state.query}
@@ -118,7 +118,7 @@ export class Search extends React.Component {
             </div>
           </form>
         </div>
-        <div className="container__details">
+        <div className="search__results--container">
           {this.state.locationDetails.length > 0 ? (
             <LocationDetails
               data={this.state.locationDetails}

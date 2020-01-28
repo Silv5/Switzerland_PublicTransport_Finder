@@ -8,7 +8,12 @@ import { Search } from "./components/Search";
 const header = (
   <header>
     <div className="container centered">
-      <h1 className="title">Switzerland Public Transport Finder</h1>
+      <h1 className="primary-color">
+        <span class="flag">
+          <i class="fas fa-times" />
+        </span>
+        <span class="title">Public Transport Finder</span>
+      </h1>
       <h2>Find public transport available within Switzerland</h2>
     </div>
   </header>
@@ -28,7 +33,6 @@ export class App extends React.Component {
     return (
       <div className="App">
         {header}
-        {choices}
         <Search />
       </div>
     );
