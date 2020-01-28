@@ -4,6 +4,8 @@ import axios from "axios";
 import { Suggestions } from "./Suggestions";
 import { LocationDetails } from "./LocationDetails";
 
+const apiKey = "";
+
 export class Search extends React.Component {
   state = {
     id: 0,
@@ -60,10 +62,18 @@ export class Search extends React.Component {
 
   // used by child component (Suggestions)
   queryHandler(newLocation, newId) {
+    let newLocationUrlCompatible = newLocation.replace(" ", "+");
+
     this.setState({
       id: newId,
       query: newLocation,
-      showSuggestions: false
+      showSuggestions: false,
+      iframeSrc:
+        "https://www.google.com/maps/embed/v1/place?key=" +
+        apiKey +
+        "&q=" +
+        newLocationUrlCompatible +
+        "+Switzerland+station"
     });
   }
 
@@ -94,7 +104,11 @@ export class Search extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="container__form--child">
               <div className="search__bar">
+                <label htmlFor="station location" className="hidden">
+                  Station Location
+                </label>
                 <input
+                  name="station location"
                   className="search__bar--input"
                   placeholder="Search for location"
                   ref={input => (this.search = input)}
@@ -118,14 +132,25 @@ export class Search extends React.Component {
             </div>
           </form>
         </div>
-        <div className="search__results--container">
-          {this.state.locationDetails.length > 0 ? (
-            <LocationDetails
-              data={this.state.locationDetails}
-              arrayLength={this.state.limit}
-            />
-          ) : null}
-        </div>
+
+        {this.state.locationDetails.length > 0 ? (
+          <React.Fragment>
+            <div className="search__results--container">
+              <LocationDetails
+                data={this.state.locationDetails}
+                arrayLength={this.state.limit}
+              />
+            </div>
+            <div className="search__results--map">
+              <h3>{this.state.query}'s position: </h3>
+              <iframe
+                title="station google maps"
+                src={this.state.iframeSrc}
+                allowFullScreen
+              />
+            </div>
+          </React.Fragment>
+        ) : null}
       </section>
     );
   }
