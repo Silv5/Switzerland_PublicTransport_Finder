@@ -11,9 +11,17 @@ export class Suggestions extends React.Component {
     this.props.queryHandler(newLocation, newId);
   };
 
+  getRandomInt() {
+    return Math.floor(Math.random() * Math.floor(100));
+  }
+
   render() {
     const options = this.props.results.map(r => (
-      <li key={r.x + "-" + r.id} id={r.id} onClick={this.clickHandler}>
+      <li
+        key={r.x + "-" + r.id + this.getRandomInt()}
+        id={r.id}
+        onClick={this.clickHandler}
+      >
         {r.name}
       </li>
     ));

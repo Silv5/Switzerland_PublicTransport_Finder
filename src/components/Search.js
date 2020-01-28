@@ -8,7 +8,7 @@ export class Search extends React.Component {
   state = {
     id: 0,
     query: "",
-    limit: 5,
+    limit: 10,
     results: [],
     locationDetails: [],
     showSuggestions: false
