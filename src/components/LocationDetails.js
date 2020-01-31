@@ -1,4 +1,5 @@
 import React from "react";
+import { PaginacionTabla } from "./PaginacionTabla";
 
 export class LocationDetails extends React.Component {
   getFormattedHour(timeObj) {
@@ -23,52 +24,37 @@ export class LocationDetails extends React.Component {
     return day + "/" + month + "/" + year;
   }
 
-  getRandomInt() {
-    return Math.floor(Math.random() * Math.floor(100));
-  }
-
   render() {
-    let stations = this.props.data;
+    let stations = [];
+
+    this.props.data.forEach(obj => {
+      stations.push([
+        obj.to,
+        obj.name,
+        this.getFormattedHour(obj.stop.departureTimestamp),
+        this.getFormattedDate(obj.stop.departure)
+      ]);
+    });
 
     return (
       <React.Fragment>
-        <React.Fragment>
-          <div className="search__results--grid-title">
-            <h3>To:</h3>
-          </div>
-          <div className="search__results--grid-title">
-            <h3>Line:</h3>
-          </div>
-          <div className="search__results--grid-title">
-            <h3>Date:</h3>
-          </div>
-        </React.Fragment>
-
-        {stations.map(st => (
-          <React.Fragment key={"00fr-" + st.number + st.name}>
-            <div
-              key={"a-" + st.number + st.name}
-              className="search__results--grid"
-            >
-              <p>{st.to}</p>
-            </div>
-            <div
-              key={"b-" + st.number + st.name}
-              className="search__results--grid"
-            >
-              <p>{st.name}</p>
-            </div>
-            <div
-              key={"c-" + st.number + st.name}
-              className="search__results--grid"
-            >
-              <p>
-                {this.getFormattedHour(st.stop.departure)} -{" "}
-                {this.getFormattedDate(st.stop.departure)}
-              </p>
-            </div>
-          </React.Fragment>
-        ))}
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>To</th>
+              <th>Line</th>
+              <th>Time</th>
+              <th>Date</th>
+              <th />
+            </tr>
+          </thead>
+          <PaginacionTabla
+            itemsperpage={5}
+            nocolumns={4}
+            items={stations}
+            pagesspan={4}
+          />
+        </table>
       </React.Fragment>
     );
   }
