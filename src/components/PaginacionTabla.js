@@ -1,15 +1,6 @@
 import React from "react";
 import ReactNextPaging from "react-next-paging";
 
-const buttonStyles = {
-  border: "1px solid #ccc",
-  background: "#fff",
-  fontSize: "1em",
-  padding: 10,
-  margin: 5,
-  width: 70
-};
-
 export const PaginacionTabla = ({
   itemsperpage,
   nocolumns,
@@ -42,22 +33,33 @@ export const PaginacionTabla = ({
         goFastFwdBdisabled
       }) => (
         <tbody>
-          {items.slice(initialitem, lastitem).map((item, index) => {
-            return item;
+          {items.slice(initialitem, lastitem).map(item => {
+            return (
+              <tr>
+                <td>{item[0]}</td>
+                <td>{item[1]}</td>
+                <td>{item[2]}</td>
+                <td>{item[3]}</td>
+              </tr>
+            );
           })}
           {noitems > 0
             ? [
                 <tr key={"pagingrow" + 100}>
-                  <td colSpan={nocolumns} style={{ textAlign: "center" }}>
+                  <td
+                    className="table__buttons"
+                    colSpan={nocolumns}
+                    style={{ textAlign: "center" }}
+                  >
                     <button
-                      style={buttonStyles}
+                      className="button__first"
                       {...getFastBackButtonProps()}
                       disabled={goFastBackBdisabled}
                     >
                       {"<<"}
                     </button>
                     <button
-                      style={buttonStyles}
+                      className="button__previous"
                       {...getBackButtonProps()}
                       disabled={goBackBdisabled}
                     >
@@ -71,21 +73,21 @@ export const PaginacionTabla = ({
                         <button
                           key={page}
                           {...getSelPageButtonProps({ page: page })}
-                          disabled={currentpage == page}
+                          disabled={currentpage === page}
                         >
                           {page}
                         </button>
                       );
                     })}
                     <button
-                      style={buttonStyles}
                       {...getFwdButtonProps()}
                       disabled={goFwdBdisabled}
+                      className="button__forward"
                     >
                       {">"}
                     </button>
                     <button
-                      style={buttonStyles}
+                      className="button__last"
                       {...getFastFwdButtonProps()}
                       disabled={goFastFwdBdisabled}
                     >

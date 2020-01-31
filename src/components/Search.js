@@ -10,7 +10,7 @@ export class Search extends React.Component {
   state = {
     id: 0,
     query: "",
-    limit: 10,
+    limit: 30,
     results: [],
     locationDetails: [],
     showSuggestions: false

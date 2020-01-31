@@ -197,16 +197,21 @@ input.search__bar--input {
 
 /* grid results */
 .search__results--container {
-  display: grid;
-  grid-gap: 0.5em;
   margin: 4em auto;
   max-width: 800px;
-  grid-template-columns: repeat(3, 1fr);
 }
 
-.search__results--grid {
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+.table {
+  margin: 0 auto;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+td.table__buttons {
+  padding-top: 1em;
 }
 
 .search__results--map {

@@ -27,6 +27,9 @@ export class LocationDetails extends React.Component {
   render() {
     let stations = [];
 
+    let st1 = ["from st1 a", "from st1 b", "from st1 c", "from st1 d"];
+    let st2 = ["from st2 a", "from st2 b", "from st2 c", "from st2 d"];
+
     this.props.data.forEach(obj => {
       stations.push([
         obj.to,
@@ -38,14 +41,13 @@ export class LocationDetails extends React.Component {
 
     return (
       <React.Fragment>
-        <table className="table table-hover">
+        <table className="table">
           <thead>
             <tr>
               <th>To</th>
               <th>Line</th>
               <th>Time</th>
               <th>Date</th>
-              <th />
             </tr>
           </thead>
           <PaginacionTabla
