@@ -4,3 +4,4 @@ React application that allows user to search for the public transport available 
 
 ### Resources 
 [Swiss public transport API](https://transport.opendata.ch)
+
