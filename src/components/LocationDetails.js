@@ -6,9 +6,9 @@ export class LocationDetails extends React.Component {
     let stations = [];
 
     this.props.data.forEach(obj => {
-      let hour = new Date(obj.stop.departureTimestamp).toLocaleTimeString(
-        "en-GB"
-      );
+      let hour = new Date(obj.stop.departureTimestamp)
+        .toLocaleTimeString("en-GB")
+        .slice(0, 5);
       let date = new Date(obj.stop.departure).toLocaleDateString("en-GB");
 
       stations.push([obj.to, obj.name, hour, date]);
