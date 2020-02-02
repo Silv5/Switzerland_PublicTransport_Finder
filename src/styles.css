@@ -2,6 +2,8 @@
 
 :root {
   --dark-gray: #333;
+  --darker-gray: #1d1d1d;
+  --md-gray: #b1b1b1;
   --light-gray: #f4f4f4;
   --primary-color: #15a72e;
   --swiss-red: #da291c;
@@ -210,8 +212,26 @@ th {
   text-align: left;
 }
 
-td.table__buttons {
-  padding-top: 1em;
+td.table__buttons button {
+  margin-top: 1em;
+  font-size: 1.5em;
+  color: var(--md-gray);
+  background: var(--dark--gray);
+  border: 1px solid black;
+  padding: 0.2em 0.5em;
+
+  transition: all 0.2s linear;
+}
+
+td.table__buttons button:disabled {
+  color: var(--darker-gray);
+  background: none;
+  cursor: default;
+}
+
+td.table__buttons button:hover:enabled {
+  background: var(--darker-gray);
+  color: var(--primary-color);
 }
 
 .search__results--map {
