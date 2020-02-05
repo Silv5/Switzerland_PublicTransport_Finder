@@ -274,14 +274,14 @@ header {
   padding: 1em;
   height: 300px;
   background-size: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-position: center;
   background-image: linear-gradient(
       to right,
       rgba(3, 3, 3, 0.7),
       rgba(3, 3, 3, 0.6)
     ),
-    url("https://images.pexels.com/photos/3371242/pexels-photo-3371242.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    url("./img/station.jpeg");
 }
 
 h1 {
