@@ -189,7 +189,6 @@ input.search__bar--input {
 
 .flag > i {
   color: var(--light-gray);
-  transform: rotate(45deg);
 }
 
 #help a {

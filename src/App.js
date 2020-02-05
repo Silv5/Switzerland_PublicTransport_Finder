@@ -10,7 +10,7 @@ const header = (
     <div className="container centered">
       <h1 className="primary-color">
         <span className="flag">
-          <i className="fas fa-times" />
+          <i className="fa fa-plus"></i>
         </span>
         <span className="title">Public Transport Finder</span>
       </h1>
