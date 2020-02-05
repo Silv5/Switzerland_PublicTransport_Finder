@@ -12,6 +12,7 @@
     "react-scripts": "3.0.1"
   },
   "devDependencies": {
+    "font-awesome": "^4.7.0",
     "typescript": "3.3.3"
   },
   "scripts": {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Suggestions } from "./Suggestions";
 import { LocationDetails } from "./LocationDetails";
 
-const apiKey = "";
+const apiKey = process.env.REACT_APP_GOOGLEMAPS_APIKEY;
 
 export class Search extends React.Component {
   state = {
