@@ -98,6 +98,7 @@ section.search {
 }
 
 .container__form--child {
+  position: relative;
   display: grid;
   grid-template-columns: 350px 36px;
   grid-template-areas:
@@ -119,6 +120,8 @@ section.search {
   grid-area: res;
   animation-name: slideIn;
   animation-duration: 3s;
+  position: absolute;
+  width: 350px;
 }
 
 input.search__bar--input {
